@@ -31,23 +31,22 @@ Desenhado para transformar **gerentes de produto em builders** — do zero ao c�
 
 ## Início em 2 Minutos
 
-**Windows (PowerShell):**
+**Windows — crie sua pasta de projeto, abra o PowerShell dentro dela e rode:**
+
 ```powershell
-git clone https://github.com/matheusbrramos/ProductFlow_Claude_V4.git
-mkdir meu-projeto
-.\ProductFlow_Claude_V4\install.ps1 -Project "meu-projeto"
+iex (iwr "https://raw.githubusercontent.com/matheusbrramos/ProductFlow_Claude_V4/main/setup.ps1" -UseBasicParsing).Content
 ```
+
+Depois, no Git Bash na mesma pasta:
 ```bash
-# No Git Bash:
-cd meu-projeto && bash start.sh
+bash start.sh
 ```
 
 **macOS / Linux:**
 ```bash
-git clone https://github.com/matheusbrramos/ProductFlow_Claude_V4.git
-mkdir meu-projeto
-bash ProductFlow_Claude_V4/install.sh meu-projeto
-cd meu-projeto && bash start.sh
+mkdir meu-projeto && cd meu-projeto
+curl -fsSL https://raw.githubusercontent.com/matheusbrramos/ProductFlow_Claude_V4/main/install.sh | bash -s -- .
+bash start.sh
 ```
 
 O assistente faz o resto. Uma pergunta por vez, em português.
@@ -293,46 +292,44 @@ docs.sh              Sonnet gera README / API / inline
 - **Windows:** PowerShell 5.1+ (já incluso no Windows 10/11) + [Git Bash](https://gitforwindows.org) para executar os scripts
 - **macOS/Linux:** Bash nativo
 
-### Instalar no Windows (PowerShell)
+### Instalar no Windows (PowerShell) — forma recomendada
 
-> **Antes de começar:** se aparecer erro de permissão, rode este comando uma vez e aceite:
+**Passo 1** — Crie a pasta do seu projeto e abra o PowerShell dentro dela.
+
+**Passo 2** — Cole este comando e pressione Enter:
+```powershell
+iex (iwr "https://raw.githubusercontent.com/matheusbrramos/ProductFlow_Claude_V4/main/setup.ps1" -UseBasicParsing).Content
+```
+Isso baixa e instala tudo automaticamente na pasta atual.
+
+**Passo 3** — Abra o Git Bash na mesma pasta e rode:
+```bash
+bash start.sh
+```
+
+> **Erro de permissão?** Rode antes (uma única vez):
 > ```powershell
 > Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 > ```
 
-**Passo 1 — Escolha uma pasta onde quer trabalhar e abra o PowerShell lá.**
-Por exemplo: `C:\Users\seu-nome\Documents`
+---
 
-**Passo 2 — Baixe o PM Builder:**
+### Instalar no Windows — forma alternativa (clone manual)
+
 ```powershell
 git clone https://github.com/matheusbrramos/ProductFlow_Claude_V4.git
-```
-
-**Passo 3 — Crie a pasta do seu projeto e instale:**
-```powershell
 mkdir meu-projeto
 .\ProductFlow_Claude_V4\install.ps1 -Project "meu-projeto"
-```
-> Troque `meu-projeto` pelo nome que quiser dar ao seu projeto.
-
-**Passo 4 — Inicie (via Git Bash):**
-```bash
-cd meu-projeto
-bash start.sh
 ```
 
 ### Instalar no macOS / Linux
 
 ```bash
-# Passo 1 — Baixe o PM Builder
-git clone https://github.com/matheusbrramos/ProductFlow_Claude_V4.git
+# Crie a pasta do projeto e instale em um comando
+mkdir meu-projeto && cd meu-projeto
+curl -fsSL https://raw.githubusercontent.com/matheusbrramos/ProductFlow_Claude_V4/main/install.sh | bash -s -- .
 
-# Passo 2 — Crie a pasta do projeto e instale
-mkdir meu-projeto
-bash ProductFlow_Claude_V4/install.sh meu-projeto
-
-# Passo 3 — Inicie
-cd meu-projeto
+# Inicie
 bash start.sh
 ```
 
@@ -353,8 +350,9 @@ bash start.sh
 ```
 pm-builder/
 ├── start.sh                     # Ponto de entrada — assistente PM
-├── install.sh                   # Instalador — macOS/Linux
-├── install.ps1                  # Instalador — Windows (PowerShell)
+├── setup.ps1                    # Instalador Windows — roda de dentro da pasta do projeto
+├── install.ps1                  # Instalador Windows — clone manual
+├── install.sh                   # Instalador macOS/Linux
 │
 ├── scripts/
 │   ├── research.sh              # Pesquisa com Haiku + Sonnet
