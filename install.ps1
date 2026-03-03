@@ -30,23 +30,57 @@ New-Item -ItemType Directory -Force -Path "$Project\scripts\lib" | Out-Null
 New-Item -ItemType Directory -Force -Path "$Project\docs"         | Out-Null
 
 # Copia helper principal
-Copy-Item "$SystemDir\start.sh" "$Project\" -Force
+if (Test-Path "$SystemDir\start.sh") {
+    Copy-Item "$SystemDir\start.sh" "$Project\" -Force
+} else {
+    Write-Host "[ERRO] start.sh nao encontrado em: $SystemDir" -ForegroundColor Red
+    exit 1
+}
 
 # Copia scripts
 $scripts = @("research.sh","prd.sh","blueprint.sh","codegen.sh","review.sh","docs.sh")
+$scriptsCopied = 0
 foreach ($s in $scripts) {
-    Copy-Item "$SystemDir\scripts\$s" "$Project\scripts\" -Force
+    if (Test-Path "$SystemDir\scripts\$s") {
+        Copy-Item "$SystemDir\scripts\$s" "$Project\scripts\" -Force
+        $scriptsCopied++
+    } else {
+        Write-Host "[AVISO] Script nao encontrado: $s" -ForegroundColor Yellow
+    }
 }
 
 # Copia libs Python
 $libs = @("scan_project.py","todo_manager.py","extract_context.py")
+$libsCopied = 0
 foreach ($l in $libs) {
-    Copy-Item "$SystemDir\scripts\lib\$l" "$Project\scripts\lib\" -Force
+    if (Test-Path "$SystemDir\scripts\lib\$l") {
+        Copy-Item "$SystemDir\scripts\lib\$l" "$Project\scripts\lib\" -Force
+        $libsCopied++
+    } else {
+        Write-Host "[AVISO] Lib nao encontrada: $l" -ForegroundColor Yellow
+    }
 }
 
 # Copia templates se nao existirem
-if (-not (Test-Path "$Project\CLAUDE.md"))  { Copy-Item "$SystemDir\templates\CLAUDE.md"  "$Project\" }
-if (-not (Test-Path "$Project\agents.md"))  { Copy-Item "$SystemDir\templates\agents.md"  "$Project\" }
+if (Test-Path "$SystemDir\templates\CLAUDE.md") {
+    if (-not (Test-Path "$Project\CLAUDE.md")) { Copy-Item "$SystemDir\templates\CLAUDE.md" "$Project\" }
+} else {
+    Write-Host "[AVISO] Template CLAUDE.md nao encontrado." -ForegroundColor Yellow
+}
+if (Test-Path "$SystemDir\templates\agents.md") {
+    if (-not (Test-Path "$Project\agents.md")) { Copy-Item "$SystemDir\templates\agents.md" "$Project\" }
+} else {
+    Write-Host "[AVISO] Template agents.md nao encontrado." -ForegroundColor Yellow
+}
+
+# Valida instalacao
+if ($scriptsCopied -eq 0 -or $libsCopied -eq 0) {
+    Write-Host ""
+    Write-Host "[ERRO] Instalacao incompleta!" -ForegroundColor Red
+    Write-Host "  scripts copiados: $scriptsCopied/6" -ForegroundColor Yellow
+    Write-Host "  libs copiadas:    $libsCopied/3" -ForegroundColor Yellow
+    exit 1
+}
 
 Write-Host ""
 Write-Host "Instalado com sucesso!" -ForegroundColor Green

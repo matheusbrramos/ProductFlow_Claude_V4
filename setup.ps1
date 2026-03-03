@@ -10,7 +10,7 @@ $TempDir    = "$env:TEMP\pmbuilder_$(Get-Random)"
 $RepoUrl    = "https://github.com/matheusbrramos/ProductFlow_Claude_V4.git"
 
 Write-Host ""
-Write-Host "PM Builder — Instalador" -ForegroundColor Cyan
+Write-Host "PM Builder - Instalador" -ForegroundColor Cyan
 Write-Host "Pasta do projeto: $ProjectDir" -ForegroundColor Gray
 Write-Host ""
 
@@ -60,17 +60,25 @@ Copy-Item "$TempDir\start.sh" "$ProjectDir\" -Force
 
 # Copia scripts
 $scripts = @("research.sh","prd.sh","blueprint.sh","codegen.sh","review.sh","docs.sh")
+$scriptsCopied = 0
 foreach ($s in $scripts) {
     if (Test-Path "$TempDir\scripts\$s") {
         Copy-Item "$TempDir\scripts\$s" "$ProjectDir\scripts\" -Force
+        $scriptsCopied++
+    } else {
+        Write-Host "[AVISO] Script nao encontrado no repositorio: $s" -ForegroundColor Yellow
     }
 }
 
 # Copia libs Python
 $libs = @("scan_project.py","todo_manager.py","extract_context.py")
+$libsCopied = 0
 foreach ($l in $libs) {
     if (Test-Path "$TempDir\scripts\lib\$l") {
         Copy-Item "$TempDir\scripts\lib\$l" "$ProjectDir\scripts\lib\" -Force
+        $libsCopied++
+    } else {
+        Write-Host "[AVISO] Lib nao encontrada no repositorio: $l" -ForegroundColor Yellow
     }
 }
 
@@ -88,6 +96,18 @@ if (Test-Path "$TempDir\templates\agents.md") {
 
 Write-Host "[3/3] Limpando arquivos temporarios..." -ForegroundColor White
 Remove-Item $TempDir -Recurse -Force
+
+# Valida instalacao
+if (-not (Test-Path "$ProjectDir\start.sh") -or $scriptsCopied -eq 0 -or $libsCopied -eq 0) {
+    Write-Host ""
+    Write-Host "[ERRO] Instalacao incompleta!" -ForegroundColor Red
+    Write-Host "  start.sh: $(if (Test-Path "$ProjectDir\start.sh") { 'OK' } else { 'FALTANDO' })" -ForegroundColor Yellow
+    Write-Host "  scripts copiados: $scriptsCopied/6" -ForegroundColor Yellow
+    Write-Host "  libs copiadas:    $libsCopied/3" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "Verifique sua conexao e tente novamente." -ForegroundColor Yellow
+    exit 1
+}
 
 Write-Host ""
 Write-Host "Instalado com sucesso!" -ForegroundColor Green
