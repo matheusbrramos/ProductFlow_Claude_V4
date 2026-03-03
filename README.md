@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-blue.svg)](https://claude.ai/code)
-[![Shell](https://img.shields.io/badge/Shell-Bash-green.svg)](https://www.gnu.org/software/bash/)
+[![Shell](https://img.shields.io/badge/Shell-Bash%20%7C%20PowerShell-green.svg)](https://www.gnu.org/software/bash/)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
 [![Models](https://img.shields.io/badge/Models-Haiku%20%7C%20Sonnet%20%7C%20Opus-purple.svg)](https://anthropic.com)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
@@ -31,11 +31,24 @@ Desenhado para transformar **gerentes de produto em builders** — do zero ao c�
 
 ## Início em 2 Minutos
 
-```bash
-# 1. Instale em seu projeto
-bash install.sh /caminho/do/projeto
+**Windows (PowerShell):**
+```powershell
+# 1. Clone e instale
+git clone https://github.com/matheusbrramos/ProductFlow_Claude_V4.git
+.\ProductFlow_Claude_V4\install.ps1 -Project "C:\caminho\do\projeto"
 
-# 2. Inicie — é só isso
+# 2. Inicie
+cd C:\caminho\do\projeto
+bash start.sh
+```
+
+**macOS / Linux:**
+```bash
+# 1. Clone e instale
+git clone https://github.com/matheusbrramos/ProductFlow_Claude_V4.git
+bash ProductFlow_Claude_V4/install.sh /caminho/do/projeto
+
+# 2. Inicie
 cd /caminho/do/projeto
 bash start.sh
 ```
@@ -280,29 +293,40 @@ docs.sh              Sonnet gera README / API / inline
 
 - [Claude Code CLI](https://docs.anthropic.com/claude-code) instalado e autenticado
 - Python 3.8+
-- Bash (macOS/Linux nativo; Windows via WSL ou Git Bash)
+- **Windows:** PowerShell 5.1+ (já incluso no Windows 10/11) + [Git Bash](https://gitforwindows.org) para executar os scripts
+- **macOS/Linux:** Bash nativo
 
-### Instalar em um projeto existente
+### Instalar no Windows (PowerShell)
 
-```bash
+```powershell
 # Clone o repositório
-git clone https://github.com/seu-usuario/pm-builder.git
+git clone https://github.com/matheusbrramos/ProductFlow_Claude_V4.git
 
-# Instale no seu projeto
-bash pm-builder/install.sh /caminho/do/seu/projeto
+# Instale em um projeto existente
+.\ProductFlow_Claude_V4\install.ps1 -Project "C:\caminho\do\seu\projeto"
 
-# Entre no projeto e inicie
-cd /caminho/do/seu/projeto
+# Ou instale em um projeto novo
+mkdir meu-projeto
+.\ProductFlow_Claude_V4\install.ps1 -Project "meu-projeto"
+
+# Entre no projeto e inicie (via Git Bash ou WSL)
+cd meu-projeto
 bash start.sh
 ```
 
-### Instalar em um projeto novo
+> **Dica Windows:** clique com o botão direito no PowerShell e selecione "Executar como Administrador" se aparecer erro de permissão de execução. Ou rode antes: `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`
+
+### Instalar no macOS / Linux
 
 ```bash
-git clone https://github.com/seu-usuario/pm-builder.git
-mkdir meu-projeto
-bash pm-builder/install.sh meu-projeto
-cd meu-projeto
+# Clone o repositório
+git clone https://github.com/matheusbrramos/ProductFlow_Claude_V4.git
+
+# Instale no seu projeto
+bash ProductFlow_Claude_V4/install.sh /caminho/do/seu/projeto
+
+# Entre no projeto e inicie
+cd /caminho/do/seu/projeto
 bash start.sh
 ```
 
@@ -323,7 +347,8 @@ bash start.sh
 ```
 pm-builder/
 ├── start.sh                     # Ponto de entrada — assistente PM
-├── install.sh                   # Instalador em projetos existentes
+├── install.sh                   # Instalador — macOS/Linux
+├── install.ps1                  # Instalador — Windows (PowerShell)
 │
 ├── scripts/
 │   ├── research.sh              # Pesquisa com Haiku + Sonnet
@@ -366,8 +391,8 @@ pm-builder/
 | Claude Code CLI | ✅ Suporte completo | Referência — otimizado para esta plataforma |
 | macOS | ✅ | Testado |
 | Linux | ✅ | Testado |
-| Windows (WSL) | ✅ | Via WSL2 ou Git Bash |
-| Windows (nativo) | ⚠️ | Scripts Bash requerem Git Bash |
+| Windows (nativo) | ✅ | `install.ps1` para instalação + Git Bash para executar scripts |
+| Windows (WSL) | ✅ | Suporte completo via WSL2 |
 
 ---
 
@@ -382,7 +407,7 @@ Contribuições são muito bem-vindas — especialmente:
 
 ```bash
 # Fork e clone
-git clone https://github.com/seu-usuario/pm-builder.git
+git clone https://github.com/matheusbrramos/ProductFlow_Claude_V4.git
 
 # Crie sua branch
 git checkout -b feature/minha-melhoria
