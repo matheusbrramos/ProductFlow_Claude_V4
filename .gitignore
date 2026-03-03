@@ -1,0 +1,35 @@
+# Arquivos gerados por projeto — não versionar
+prd.md
+blueprint.md
+todo.md
+research.md
+agents.md
+CLAUDE.md
+.interview_context.md
+
+# Manter templates
+!templates/CLAUDE.md
+!templates/agents.md
+
+# Ambiente
+.env
+.env.local
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
