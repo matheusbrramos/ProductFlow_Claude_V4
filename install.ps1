@@ -10,7 +10,7 @@ $SystemDir = $PSScriptRoot
 
 Write-Host ""
 Write-Host "Instalando sistema de agentes em: $Project" -ForegroundColor Cyan
-Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor DarkGray
+Write-Host "-----------------------------------" -ForegroundColor DarkGray
 
 # Verifica dependencias
 if (-not (Get-Command claude -ErrorAction SilentlyContinue)) {
@@ -51,14 +51,14 @@ if (-not (Test-Path "$Project\agents.md"))  { Copy-Item "$SystemDir\templates\ag
 Write-Host ""
 Write-Host "Instalado com sucesso!" -ForegroundColor Green
 Write-Host ""
-Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor DarkGray
+Write-Host "-----------------------------------" -ForegroundColor DarkGray
 Write-Host "PARA COMECAR:" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "   bash start.sh" -ForegroundColor White
 Write-Host ""
 Write-Host "   O assistente vai te guiar por tudo." -ForegroundColor Gray
 Write-Host "   Nao precisa saber de tecnologia!" -ForegroundColor Gray
-Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor DarkGray
+Write-Host "-----------------------------------" -ForegroundColor DarkGray
 Write-Host ""
 Write-Host "FLUXO MANUAL (para devs):" -ForegroundColor Cyan
 Write-Host ""
@@ -69,10 +69,10 @@ Write-Host "  bash scripts/codegen.sh [--all]"
 Write-Host "  bash scripts/review.sh ."
 Write-Host "  bash scripts/docs.sh . --type readme"
 Write-Host ""
-Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor DarkGray
+Write-Host "-----------------------------------" -ForegroundColor DarkGray
 Write-Host "Modelos utilizados:"
 Write-Host "  Haiku  -> entrevista, triagem, todo.md  (minimo custo)"
 Write-Host "  Sonnet -> blueprint, codegen, review    (padrao)"
 Write-Host "  Opus   -> PRD                           (cirurgico)"
-Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor DarkGray
+Write-Host "-----------------------------------" -ForegroundColor DarkGray
 Write-Host ""

@@ -33,24 +33,21 @@ Desenhado para transformar **gerentes de produto em builders** — do zero ao c�
 
 **Windows (PowerShell):**
 ```powershell
-# 1. Clone e instale
 git clone https://github.com/matheusbrramos/ProductFlow_Claude_V4.git
-.\ProductFlow_Claude_V4\install.ps1 -Project "C:\caminho\do\projeto"
-
-# 2. Inicie
-cd C:\caminho\do\projeto
-bash start.sh
+mkdir meu-projeto
+.\ProductFlow_Claude_V4\install.ps1 -Project "meu-projeto"
+```
+```bash
+# No Git Bash:
+cd meu-projeto && bash start.sh
 ```
 
 **macOS / Linux:**
 ```bash
-# 1. Clone e instale
 git clone https://github.com/matheusbrramos/ProductFlow_Claude_V4.git
-bash ProductFlow_Claude_V4/install.sh /caminho/do/projeto
-
-# 2. Inicie
-cd /caminho/do/projeto
-bash start.sh
+mkdir meu-projeto
+bash ProductFlow_Claude_V4/install.sh meu-projeto
+cd meu-projeto && bash start.sh
 ```
 
 O assistente faz o resto. Uma pergunta por vez, em português.
@@ -298,35 +295,44 @@ docs.sh              Sonnet gera README / API / inline
 
 ### Instalar no Windows (PowerShell)
 
+> **Antes de começar:** se aparecer erro de permissão, rode este comando uma vez e aceite:
+> ```powershell
+> Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+> ```
+
+**Passo 1 — Escolha uma pasta onde quer trabalhar e abra o PowerShell lá.**
+Por exemplo: `C:\Users\seu-nome\Documents`
+
+**Passo 2 — Baixe o PM Builder:**
 ```powershell
-# Clone o repositório
 git clone https://github.com/matheusbrramos/ProductFlow_Claude_V4.git
+```
 
-# Instale em um projeto existente
-.\ProductFlow_Claude_V4\install.ps1 -Project "C:\caminho\do\seu\projeto"
-
-# Ou instale em um projeto novo
+**Passo 3 — Crie a pasta do seu projeto e instale:**
+```powershell
 mkdir meu-projeto
 .\ProductFlow_Claude_V4\install.ps1 -Project "meu-projeto"
+```
+> Troque `meu-projeto` pelo nome que quiser dar ao seu projeto.
 
-# Entre no projeto e inicie (via Git Bash ou WSL)
+**Passo 4 — Inicie (via Git Bash):**
+```bash
 cd meu-projeto
 bash start.sh
 ```
 
-> **Dica Windows:** clique com o botão direito no PowerShell e selecione "Executar como Administrador" se aparecer erro de permissão de execução. Ou rode antes: `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`
-
 ### Instalar no macOS / Linux
 
 ```bash
-# Clone o repositório
+# Passo 1 — Baixe o PM Builder
 git clone https://github.com/matheusbrramos/ProductFlow_Claude_V4.git
 
-# Instale no seu projeto
-bash ProductFlow_Claude_V4/install.sh /caminho/do/seu/projeto
+# Passo 2 — Crie a pasta do projeto e instale
+mkdir meu-projeto
+bash ProductFlow_Claude_V4/install.sh meu-projeto
 
-# Entre no projeto e inicie
-cd /caminho/do/seu/projeto
+# Passo 3 — Inicie
+cd meu-projeto
 bash start.sh
 ```
 
